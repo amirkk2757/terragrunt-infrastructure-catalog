@@ -16,7 +16,7 @@ terraform {
 
 inputs = {
   # Required inputs
-  vpc_cidr           = value.vpc_cidr
-  kubernetes_version = value.kubernetes_version
+  vpc_cidr           = values.vpc_cidr
+  kubernetes_version = values.kubernetes_version
 
 }
