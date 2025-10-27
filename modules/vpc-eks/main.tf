@@ -22,10 +22,10 @@ data "aws_ssm_parameter" "argocd_hub_role" {
 
 # Reading parameter created by common terraform module for team backend and frontend IAM roles
 data "aws_ssm_parameter" "backend_team_view_role" {
-  name  = "${local.context_prefix}-${var.backend_team_view_role_suffix}"
+  name  = "${local.context_prefix}-${var.ssm_parameter_name_backend_team_view_role_suffix}"
 }
 data "aws_ssm_parameter" "frontend_team_view_role" {
-  name  = "${local.context_prefix}-${var.frontend_team_view_role_suffix}"
+  name  = "${local.context_prefix}-${var.ssm_parameter_name_frontend_team_view_role_suffix}"
 }
 
 

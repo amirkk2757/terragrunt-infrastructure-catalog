@@ -48,12 +48,12 @@ variable "amazon_managed_prometheus_suffix" {
   default     = "amp-hub"
 }
 
-variable "backend_team_view_role_suffix" {
+variable "ssm_parameter_name_backend_team_view_role_suffix" {
   description = "SSM parameter name for Fleet Workshop Team Backend IAM Role"
   type        = string
   default     = "backend-team-view-role"
 }
-variable "frontend_team_view_role_suffix" {
+variable "ssm_parameter_name_frontend_team_view_role_suffix" {
   description = "SSM parameter name for Fleet Workshop Team Backend IAM Role"
   type        = string
   default     = "frontend-team-view-role"
