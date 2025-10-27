@@ -143,7 +143,7 @@ locals {
     },
     {
       # Opensource monitoring
-      amp_endpoint_url = "${data.aws_ssm_parameter.amp_endpoint.value}"
+      # amp_endpoint_url = "${data.aws_ssm_parameter.amp_endpoint.value}"
       adot_collector_namespace = local.adot_collector_namespace
       adot_collector_service_account = local.adot_collector_service_account
     },
@@ -157,9 +157,9 @@ locals {
   }
 }
 
-data "aws_ssm_parameter" "amp_endpoint" {
-  name = "${local.context_prefix}-${var.amazon_managed_prometheus_suffix}-endpoint"
-}
+# data "aws_ssm_parameter" "amp_endpoint" {
+#   name = "${local.context_prefix}-${var.amazon_managed_prometheus_suffix}-endpoint"
+# }
 
 resource "aws_secretsmanager_secret" "spoke_cluster_secret" {
   name                    = "fleet-hub-cluster/${var.cluster_name_prefix}-${terraform.workspace}"
