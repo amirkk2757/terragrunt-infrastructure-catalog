@@ -11,7 +11,7 @@ terraform {
   //
   // Assume that a user consuming this unit will exclusively have access
   // to the directory this file is in, and nothing else in this repository.
-  source = "git::https://github.com/amirkk2757/terragrunt-infrastructure-catalog.git//modules/lambda-service?ref=${values.version}"
+  source = "git::https://github.com/amirkk2757/terragrunt-infrastructure-catalog.git//modules/lambda?ref=${values.version}"
 
   before_hook "package" {
     commands = ["apply", "plan"]
