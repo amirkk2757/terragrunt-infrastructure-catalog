@@ -162,7 +162,7 @@ locals {
 # }
 
 resource "aws_secretsmanager_secret" "spoke_cluster_secret" {
-  name                    = "fleet-hub-cluster/${var.cluster_name_prefix}-${terraform.workspace}"
+  name                    = "fleet-hub-cluster/${var.cluster_name_prefix}"
   recovery_window_in_days = 0
 }
 
