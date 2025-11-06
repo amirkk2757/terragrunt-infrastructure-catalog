@@ -68,7 +68,7 @@ variable "enable_prometheus_scraper" {
 variable "cluster_name_prefix" {
   description = "Prefix for the EKS spoke cluster name (will be appended with workspace name)"
   type        = string
-  default     = "fleet-spoke"
+  default     = ""
 }
 
 variable "tenant_name" {
