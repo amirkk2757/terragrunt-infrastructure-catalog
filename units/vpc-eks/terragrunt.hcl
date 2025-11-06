@@ -18,5 +18,7 @@ inputs = {
   # Required inputs
   vpc_cidr           = values.vpc_cidr
   kubernetes_version = values.kubernetes_version
+  tenant_name        = values.tenant_name
+  environment_name   = values.environment_name
 
 }

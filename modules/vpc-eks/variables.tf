@@ -74,11 +74,11 @@ variable "cluster_name_prefix" {
 variable "tenant_name" {
   description = "tenant name"
   type        = string
-  default     = "fleet-spoke"
+  default     = ""
 }
 
 variable "environment_name" {
   description = "Environment name like dev prod"
   type        = string
-  default     = "fleet-spoke"
+  default     = ""
 }
