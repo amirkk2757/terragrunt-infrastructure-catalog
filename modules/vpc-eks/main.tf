@@ -17,21 +17,24 @@ data "aws_iam_session_context" "current" {
 
 # Reading parameter created by hub cluster to allow access of argocd to spoke clusters
 data "aws_ssm_parameter" "argocd_hub_role" {
-  name = "${local.context_prefix}-${var.ssm_parameter_name_argocd_role_suffix}"
+  provider = aws.cicd-hub
+  name     = "${local.context_prefix}-${var.ssm_parameter_name_argocd_role_suffix}"
 }
 
-# Reading parameter created by common terraform module for team backend and frontend IAM roles
+# Reading parameter created by common terraform module for team backend and frontend IAM roles.gitops-argocd-central-role
 data "aws_ssm_parameter" "backend_team_view_role" {
-  name  = "${local.context_prefix}-${var.ssm_parameter_name_backend_team_view_role_suffix}"
+  provider    = aws.cicd-hub
+  name        = "${local.context_prefix}-${var.ssm_parameter_name_backend_team_view_role_suffix}"
 }
 data "aws_ssm_parameter" "frontend_team_view_role" {
-  name  = "${local.context_prefix}-${var.ssm_parameter_name_frontend_team_view_role_suffix}"
+  provider = aws.cicd-hub
+  name     = "${local.context_prefix}-${var.ssm_parameter_name_frontend_team_view_role_suffix}"
 }
 
 
 locals {
   context_prefix = var.project_context_prefix
-  name            = "${var.cluster_name_prefix}"
+  name            = "${var.cluster_name_prefix}-${var.tenant_name}-${var.environment_name}"
   region          = data.aws_region.current.id
   cluster_version = var.kubernetes_version
   vpc_cidr        = var.vpc_cidr
@@ -162,13 +165,15 @@ locals {
 # }
 
 resource "aws_secretsmanager_secret" "spoke_cluster_secret" {
-  name                    = "fleet-hub-cluster/${var.cluster_name_prefix}"
+  provider                = aws.cicd-hub
+  name                    = "fleet-hub-cluster/${local.name}"
   recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "argocd_cluster_secret_version" {
-  secret_id = aws_secretsmanager_secret.spoke_cluster_secret.id
-  secret_string = jsonencode({
+  provider       = aws.cicd-hub
+  secret_id      = aws_secretsmanager_secret.spoke_cluster_secret.id
+  secret_string  = jsonencode({
     metadata     = local.addons_metadata
     addons       = local.addons
     server       = module.eks.cluster_endpoint

@@ -33,7 +33,7 @@ variable "kms_key_admin_roles" {
 variable "project_context_prefix" {
   description = "Prefix for project"
   type        = string
-  default     = "gitops"
+  default     = "eks-fleet-gitops"
 }
 
 variable "ssm_parameter_name_argocd_role_suffix" {
@@ -67,6 +67,18 @@ variable "enable_prometheus_scraper" {
 
 variable "cluster_name_prefix" {
   description = "Prefix for the EKS spoke cluster name (will be appended with workspace name)"
+  type        = string
+  default     = "fleet-spoke"
+}
+
+variable "tenant_name" {
+  description = "tenant name"
+  type        = string
+  default     = "fleet-spoke"
+}
+
+variable "environment_name" {
+  description = "Environment name like dev prod"
   type        = string
   default     = "fleet-spoke"
 }
