@@ -34,7 +34,7 @@ data "aws_ssm_parameter" "frontend_team_view_role" {
 
 locals {
   context_prefix = var.project_context_prefix
-  name            = "${var.cluster_name_prefix}-${var.tenant_name}-${var.environment_name}"
+  name            = "${var.tenant_name}-${var.environment_name}"
   region          = data.aws_region.current.id
   cluster_version = var.kubernetes_version
   vpc_cidr        = var.vpc_cidr
