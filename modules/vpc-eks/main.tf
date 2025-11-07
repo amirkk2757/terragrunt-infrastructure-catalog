@@ -190,6 +190,31 @@ resource "aws_secretsmanager_secret_version" "argocd_cluster_secret_version" {
   })
 }
 
+resource "aws_secretsmanager_secret" "spoke_cluster_secret" {
+  name                    = "fleet-hub-cluster/${local.name}"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "argocd_cluster_secret_version" {
+  secret_id      = aws_secretsmanager_secret.spoke_cluster_secret.id
+  secret_string  = jsonencode({
+    metadata     = local.addons_metadata
+    addons       = local.addons
+    server       = module.eks.cluster_endpoint
+    config = {
+      tlsClientConfig = {
+        insecure = false,
+        caData   = module.eks.cluster_certificate_authority_data
+      },
+      awsAuthConfig = {
+        clusterName = module.eks.cluster_name,
+        roleARN     = aws_iam_role.spoke.arn
+      }
+    }
+  })
+}
+
+
 ################################################################################
 # ArgoCD EKS Access
 ################################################################################
