@@ -190,12 +190,12 @@ resource "aws_secretsmanager_secret_version" "argocd_cluster_secret_version" {
   })
 }
 
-resource "aws_secretsmanager_secret" "spoke_cluster_secret" {
+resource "aws_secretsmanager_secret" "spoke_cluster_local_secret" {
   name                    = "fleet-hub-cluster/${local.name}"
   recovery_window_in_days = 0
 }
 
-resource "aws_secretsmanager_secret_version" "argocd_cluster_secret_version" {
+resource "aws_secretsmanager_secret_version" "argocd_cluster_local_secret_version" {
   secret_id      = aws_secretsmanager_secret.spoke_cluster_secret.id
   secret_string  = jsonencode({
     metadata     = local.addons_metadata
