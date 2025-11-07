@@ -196,7 +196,7 @@ resource "aws_secretsmanager_secret" "spoke_cluster_local_secret" {
 }
 
 resource "aws_secretsmanager_secret_version" "argocd_cluster_local_secret_version" {
-  secret_id      = aws_secretsmanager_secret.spoke_cluster_secret.id
+  secret_id      = aws_secretsmanager_secret.spoke_cluster_local_secret.id
   secret_string  = jsonencode({
     metadata     = local.addons_metadata
     addons       = local.addons
